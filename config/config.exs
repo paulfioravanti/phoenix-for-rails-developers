@@ -6,16 +6,15 @@
 use Mix.Config
 
 # General application configuration
-config :storex,
-  ecto_repos: [Storex.Repo]
+config :storex, ecto_repos: [Storex.Repo]
 
 # Configures the endpoint
 config :storex, StorexWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "26+MFM0qGGzU0v3Vutl70MbiBI9wx4NydyW3D3TJynHVnDiO4eNqg4qrWISQfNAk",
+  secret_key_base:
+    "26+MFM0qGGzU0v3Vutl70MbiBI9wx4NydyW3D3TJynHVnDiO4eNqg4qrWISQfNAk",
   render_errors: [view: StorexWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Storex.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Storex.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,4 +23,4 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

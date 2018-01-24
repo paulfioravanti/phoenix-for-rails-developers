@@ -11,7 +11,7 @@ defmodule Storex.Application do
       # Start the Ecto repository
       supervisor(Storex.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(StorexWeb.Endpoint, []),
+      supervisor(StorexWeb.Endpoint, [])
       # Start your own worker by calling: Storex.Worker.start_link(arg1, arg2, arg3)
       # worker(Storex.Worker, [arg1, arg2, arg3]),
     ]
