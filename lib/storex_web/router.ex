@@ -9,6 +9,7 @@ defmodule StorexWeb.Router do
     plug :put_secure_browser_headers
     plug StorexWeb.Plugs.Cart
     plug StorexWeb.Plugs.ItemsCount
+    plug StorexWeb.Plugs.CurrentUser
   end
 
   pipeline :api do
@@ -25,6 +26,12 @@ defmodule StorexWeb.Router do
     resources "/cart", CartController,
       singleton: true,
       only: [:show, :create, :delete]
+
+    resources "/users", UserController, only: [:new, :create]
+
+    resources "/session", SessionController,
+      only: [:new, :create],
+      singleton: true
   end
 
   # Other scopes may use custom stacks.
