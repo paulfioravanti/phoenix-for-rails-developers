@@ -32,6 +32,8 @@ defmodule StorexWeb.Router do
     resources "/session", SessionController,
       only: [:new, :create],
       singleton: true
+
+    resources "/checkout", CheckoutController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

@@ -1,12 +1,13 @@
 defmodule Storex.Sales.LineItem do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Storex.Sales.{Cart, LineItem}
+  alias Storex.Sales.{Cart, LineItem, Order}
   alias Storex.Store.Book
 
   schema "sales_line_items" do
-    belongs_to(:cart, Cart)
     belongs_to(:book, Book)
+    belongs_to(:cart, Cart)
+    belongs_to(:order, Order)
     field(:quantity, :integer)
     timestamps()
   end
