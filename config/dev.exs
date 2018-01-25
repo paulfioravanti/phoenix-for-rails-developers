@@ -62,3 +62,10 @@ config :storex, Storex.Repo,
   database: "storex_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configures automated testing/linting
+config :mix_test_watch,
+  clear: true,
+  tasks: [
+    "test"
+  ]
