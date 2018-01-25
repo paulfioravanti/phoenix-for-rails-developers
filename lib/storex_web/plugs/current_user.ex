@@ -17,7 +17,18 @@ defmodule StorexWeb.Plugs.CurrentUser do
   end
 
   def assign_user(conn, user) do
-    assign(conn, @assign_name, user)
+    conn
+    |> assign(@assign_name, user)
+    |> assign(:is_admin, is_admin?(user))
+  end
+
+  def is_admin?(%Plug.Conn{} = conn) do
+    user = get(conn)
+    is_admin?(user)
+  end
+
+  def is_admin?(user) do
+    user && user.is_admin
   end
 
   def set(conn, user) do
