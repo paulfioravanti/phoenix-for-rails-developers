@@ -1,7 +1,10 @@
 defmodule Storex.Accounts.User do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Storex.Accounts.User
+  alias Comeonin.Bcrypt
 
   schema "accounts_users" do
     field(:email, :string)
@@ -26,11 +29,11 @@ defmodule Storex.Accounts.User do
     |> cast(attrs, [:is_admin])
   end
 
-  defp put_password_hash(changeset = %{valid?: true}) do
+  defp put_password_hash(%{valid?: true} = changeset) do
     password_hash =
       changeset
       |> get_change(:password)
-      |> Comeonin.Bcrypt.add_hash()
+      |> Bcrypt.add_hash()
 
     change(changeset, password_hash)
   end
@@ -41,6 +44,6 @@ defmodule Storex.Accounts.User do
 
   def check_password(user, password) do
     user
-    |> Comeonin.Bcrypt.check_pass(password)
+    |> Bcrypt.check_pass(password)
   end
 end

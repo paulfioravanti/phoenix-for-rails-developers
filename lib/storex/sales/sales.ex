@@ -1,9 +1,10 @@
 defmodule Storex.Sales do
+  @moduledoc false
+
   import Ecto.Query, warn: false
   alias Storex.Repo
-  alias Storex.Sales.Cart
-  alias Storex.Sales.LineItem
-  alias Storex.Sales.Order
+  alias Storex.Sales.{Cart, LineItem, Order}
+  alias Ecto.Multi
 
   def create_cart(attrs \\ %{}) do
     %Cart{}
@@ -61,15 +62,15 @@ defmodule Storex.Sales do
     end)
   end
 
-  def new_order() do
+  def new_order do
     Order.changeset(%Order{}, %{})
   end
 
   def process_order(user, cart, attrs) do
     result =
-      Ecto.Multi.new()
-      |> Ecto.Multi.run(:order, fn _ -> create_order(user, attrs) end)
-      |> Ecto.Multi.run(:line_items, fn %{order: order} ->
+      Multi.new()
+      |> Multi.run(:order, fn _ -> create_order(user, attrs) end)
+      |> Multi.run(:line_items, fn %{order: order} ->
         create_order_line_items(order, cart)
       end)
       |> Repo.transaction()
@@ -94,7 +95,8 @@ defmodule Storex.Sales do
 
     order_line_items =
       Enum.map(cart_line_items, fn item ->
-        Ecto.build_assoc(order, :line_items, %{
+        order
+        |> Ecto.build_assoc(:line_items, %{
           book_id: item.book_id,
           quantity: item.quantity
         })
@@ -104,7 +106,7 @@ defmodule Storex.Sales do
     {:ok, order_line_items}
   end
 
-  def list_orders() do
+  def list_orders do
     Repo.all(Order, preload: [:user, [line_items: :book]])
   end
 end

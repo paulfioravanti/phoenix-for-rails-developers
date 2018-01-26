@@ -19,7 +19,7 @@ defmodule Storex.SalesTest do
     book
   end
 
-  def cart_fixture() do
+  def cart_fixture do
     {:ok, cart} = Sales.create_cart()
 
     cart

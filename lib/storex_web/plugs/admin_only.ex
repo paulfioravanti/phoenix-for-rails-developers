@@ -1,11 +1,14 @@
 defmodule StorexWeb.Plugs.AdminOnly do
+  @moduledoc false
+
   import Plug.Conn
   alias StorexWeb.Plugs
+  alias Plugs.CurrentUser
 
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    if Plugs.CurrentUser.is_admin?(conn) do
+    if CurrentUser.is_admin?(conn) do
       conn
     else
       conn

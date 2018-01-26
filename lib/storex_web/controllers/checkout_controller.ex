@@ -2,6 +2,9 @@ defmodule StorexWeb.CheckoutController do
   use StorexWeb, :controller
   alias Storex.Sales
   alias StorexWeb.Plugs
+  alias Plugs.Cart, as: SessionCart
+  alias Plugs.CurrentUser
+
   plug :ensure_current_user
 
   def new(conn, _params) do
@@ -13,14 +16,14 @@ defmodule StorexWeb.CheckoutController do
   end
 
   def create(conn, %{"order" => order_params}) do
-    cart = Plugs.Cart.get(conn)
-    user = Plugs.CurrentUser.get(conn)
+    cart = SessionCart.get(conn)
+    user = CurrentUser.get(conn)
 
     case Sales.process_order(user, cart, order_params) do
       {:ok, _order} ->
         conn
         |> put_flash(:info, "Order successfuly created. Thanks!")
-        |> Plugs.Cart.forget()
+        |> SessionCart.forget()
         |> redirect(to: book_path(conn, :index))
 
       {:error, changeset} ->
@@ -31,7 +34,7 @@ defmodule StorexWeb.CheckoutController do
   end
 
   defp ensure_current_user(conn, _opts) do
-    if Plugs.CurrentUser.get(conn) do
+    if CurrentUser.get(conn) do
       conn
     else
       conn
@@ -42,7 +45,7 @@ defmodule StorexWeb.CheckoutController do
   end
 
   defp with_cart_information(conn) do
-    cart = Plugs.Cart.get(conn)
+    cart = SessionCart.get(conn)
 
     items = Sales.list_line_items(cart)
     items_count = Sales.line_items_quantity_count(items)

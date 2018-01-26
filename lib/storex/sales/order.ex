@@ -1,4 +1,6 @@
 defmodule Storex.Sales.Order do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Storex.Sales.{LineItem, Order}

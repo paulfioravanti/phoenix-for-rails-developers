@@ -34,6 +34,7 @@ defmodule Storex.Mixfile do
   defp deps do
     [
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
+      {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false},
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},

@@ -1,4 +1,6 @@
 defmodule Storex.Accounts do
+  @moduledoc false
+
   import Ecto.Query, warn: false
   alias Storex.Repo
   alias Storex.Accounts.User
@@ -14,7 +16,7 @@ defmodule Storex.Accounts do
     |> Repo.get!(id)
   end
 
-  def new_user() do
+  def new_user do
     %User{}
     |> User.changeset(%{})
   end

@@ -1,7 +1,8 @@
 defmodule StorexWeb.LayoutView do
   use StorexWeb, :view
+  alias StorexWeb.Plugs.ItemsCount
 
   def items_count(conn) do
-    StorexWeb.Plugs.ItemsCount.get(conn)
+    ItemsCount.get(conn)
   end
 end

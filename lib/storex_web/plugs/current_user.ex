@@ -1,4 +1,6 @@
 defmodule StorexWeb.Plugs.CurrentUser do
+  @moduledoc false
+
   import Plug.Conn
   alias Storex.Accounts
 
@@ -10,9 +12,10 @@ defmodule StorexWeb.Plugs.CurrentUser do
   def call(conn, _opts) do
     user_id = get_session(conn, @session_name)
 
-    cond do
-      user = user_id && Accounts.get_user!(user_id) -> assign_user(conn, user)
-      true -> assign_user(conn, nil)
+    if user = user_id && Accounts.get_user!(user_id) do
+      assign_user(conn, user)
+    else
+      assign_user(conn, nil)
     end
   end
 

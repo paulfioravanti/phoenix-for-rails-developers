@@ -1,4 +1,6 @@
 defmodule Storex.Store.Book do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Storex.Store.Book

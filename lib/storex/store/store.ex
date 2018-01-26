@@ -1,4 +1,6 @@
 defmodule Storex.Store do
+  @moduledoc false
+
   alias Storex.Repo
   alias Storex.Store.Book
 
@@ -8,7 +10,7 @@ defmodule Storex.Store do
     |> Repo.insert()
   end
 
-  def list_books() do
+  def list_books do
     Repo.all(Book)
   end
 

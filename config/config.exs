@@ -30,6 +30,7 @@ if Mix.env() == :dev do
   config :mix_test_watch,
     clear: true,
     tasks: [
-      "test"
+      "test",
+      "credo --strict"
     ]
 end
