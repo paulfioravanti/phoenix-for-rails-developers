@@ -17,7 +17,7 @@ defmodule StorexWeb.CheckoutController do
     user = Plugs.CurrentUser.get(conn)
 
     case Sales.process_order(user, cart, order_params) do
-      {:ok, order} ->
+      {:ok, _order} ->
         conn
         |> put_flash(:info, "Order successfuly created. Thanks!")
         |> Plugs.Cart.forget()

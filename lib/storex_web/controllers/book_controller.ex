@@ -18,7 +18,7 @@ defmodule StorexWeb.BookController do
 
   def create(conn, %{"book" => book_params}) do
     case Store.create_book(book_params) do
-      {:ok, book} ->
+      {:ok, _book} ->
         conn
         |> put_flash(:info, "Book created")
         |> redirect(to: "/")
@@ -39,7 +39,7 @@ defmodule StorexWeb.BookController do
     book = Store.get_book(book_id)
 
     case Store.update_book(book, book_params) do
-      {:ok, book} ->
+      {:ok, _book} ->
         conn
         |> put_flash(:info, "Book updated")
         |> redirect(to: "/")
