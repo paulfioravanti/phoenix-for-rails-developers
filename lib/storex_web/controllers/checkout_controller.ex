@@ -45,9 +45,11 @@ defmodule StorexWeb.CheckoutController do
   end
 
   defp with_cart_information(conn) do
-    cart = SessionCart.get(conn)
+    items =
+      conn
+      |> SessionCart.get()
+      |> Sales.list_line_items()
 
-    items = Sales.list_line_items(cart)
     items_count = Sales.line_items_quantity_count(items)
     total_price = Sales.line_items_total_price(items)
 

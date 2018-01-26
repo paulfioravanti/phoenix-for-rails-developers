@@ -12,8 +12,7 @@ defmodule StorexWeb.BookController do
   end
 
   def new(conn, _params) do
-    changeset = Store.change_book()
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: Store.change_book())
   end
 
   def create(conn, %{"book" => book_params}) do
@@ -50,8 +49,9 @@ defmodule StorexWeb.BookController do
   end
 
   def delete(conn, %{"id" => book_id}) do
-    book = Store.get_book(book_id)
-    Store.delete_book(book)
+    book_id
+    |> Store.get_book()
+    |> Store.delete_book()
 
     conn
     |> put_flash(:info, "Book deleted")

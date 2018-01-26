@@ -4,6 +4,7 @@ defmodule StorexWeb.Helpers.PriceFormatter do
   alias Number.Currency
 
   def format_price(%Decimal{} = price) do
-    Currency.number_to_currency(price)
+    price
+    |> Currency.number_to_currency()
   end
 end

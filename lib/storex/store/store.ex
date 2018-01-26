@@ -11,15 +11,18 @@ defmodule Storex.Store do
   end
 
   def list_books do
-    Repo.all(Book)
+    Book
+    |> Repo.all()
   end
 
   def get_book(id) do
-    Repo.get(Book, id)
+    Book
+    |> Repo.get(id)
   end
 
   def change_book(book \\ %Book{}) do
-    Book.changeset(book, %{})
+    book
+    |> Book.changeset(%{})
   end
 
   def update_book(book, attrs) do
@@ -29,6 +32,7 @@ defmodule Storex.Store do
   end
 
   def delete_book(book) do
-    Repo.delete(book)
+    book
+    |> Repo.delete()
   end
 end

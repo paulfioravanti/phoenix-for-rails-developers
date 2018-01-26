@@ -14,9 +14,9 @@
 </div>
 
 <%= link "Add to cart",
-      to: cart_path(@conn, :create, book_id: @book.id),
-      method: :create,
-      class: "button button-primary" %>
+         to: cart_path(@conn, :create, book_id: @book.id),
+         method: :create,
+         class: "button button-primary" %>
 
 <%= link "Delete",
          to: book_path(@conn, :delete, @book),

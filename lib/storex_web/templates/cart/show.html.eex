@@ -14,14 +14,14 @@
           <span class="value-tag__content">
             <div class="step minus">
               <%= link "-",
-                    to: cart_path(@conn, :delete, book_id: item.book_id),
-                    method: :delete %>
+                       to: cart_path(@conn, :delete, book_id: item.book_id),
+                       method: :delete %>
             </div>
             <%= item.quantity %>
             <div class="step plus">
               <%= link "+",
-                    to: cart_path(@conn, :create, book_id: item.book_id),
-                    method: :create %>
+                       to: cart_path(@conn, :create, book_id: item.book_id),
+                       method: :create %>
             </div>
           </span>
         </div>
@@ -45,5 +45,5 @@
 </div>
 
 <%= link "Checkout",
-      to: checkout_path(@conn, :new),
-      class: "button button­primary" %>
+         to: checkout_path(@conn, :new),
+         class: "button button­primary" %>
